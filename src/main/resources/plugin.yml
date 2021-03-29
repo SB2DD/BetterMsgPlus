@@ -1,0 +1,12 @@
+name: BetterMsgPlus
+version: ${project.version}
+main: me.polishkrowa.BetterMsgPlus.MsgPlus
+api-version: 1.16
+
+commands:
+  tell:
+    description: Command to private message players
+    aliases: [msg]
+  reply:
+    description: Command to reply to another player's private message(s)
+    aliases: [r]
