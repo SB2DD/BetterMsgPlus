@@ -2,6 +2,9 @@ name: BetterMsgPlus
 version: ${project.version}
 main: me.polishkrowa.BetterMsgPlus.MsgPlus
 api-version: 1.16
+authors:
+  - PolishKrowa
+  - Villagers654
 
 commands:
   tell:
