@@ -3,6 +3,7 @@ package me.polishkrowa.BetterMsgPlus;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.TranslatableComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,6 +19,8 @@ public final class MsgPlus extends JavaPlugin {
     //player, lastReceived
     public static HashMap<UUID, UUID> lastReceived = new HashMap<>();
 
+    public static MsgPlus INSTANCE;
+
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -26,6 +29,8 @@ public final class MsgPlus extends JavaPlugin {
 
         Objects.requireNonNull(this.getCommand("reply")).setExecutor(new ReplyCommand());
         Objects.requireNonNull(this.getCommand("reply")).setTabCompleter(new ReplyCommand());
+        saveDefaultConfig();
+        INSTANCE = this;
     }
 
     public static TextComponent parseURL(String string) {
@@ -63,5 +68,10 @@ public final class MsgPlus extends JavaPlugin {
         incoming.addWith(sender.getName());
         incoming.addWith(output);
         to.spigot().sendMessage(incoming);
+    }
+
+    public static String getTranslation(String key) {
+        String output = INSTANCE.getConfig().getString(key);
+        return ChatColor.translateAlternateColorCodes('&', output);
     }
 }

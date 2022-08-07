@@ -17,21 +17,21 @@ public class TellCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (args.length < 1) {
-            if (label.equalsIgnoreCase("tell"))
-                sender.sendMessage(ChatColor.RED + "No player name was entered. Correct usage: /tell <player-name> <message>");
-            else
-                sender.sendMessage(ChatColor.RED + "No player name was entered. Correct usage: /msg <player-name> <message>");
+            String message = MsgPlus.getTranslation("usage");
+            message = message.replaceFirst("%s", label);
+            sender.sendMessage(message);
+
             return true;
         }
 
         if (args.length < 2) {
-            sender.sendMessage(ChatColor.RED + "No message was entered !");
+            sender.sendMessage(MsgPlus.getTranslation("no-message"));
             return true;
         }
 
         Player to = Bukkit.getPlayerExact(args[0]);
         if (to == null) {
-            sender.sendMessage(ChatColor.RED + "No Player Found !");
+            sender.sendMessage(MsgPlus.getTranslation("unknown-player"));
             return true;
         }
 

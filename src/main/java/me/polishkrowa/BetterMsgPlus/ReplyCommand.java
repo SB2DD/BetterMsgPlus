@@ -17,24 +17,24 @@ public class ReplyCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.RED + "Console can't reply to messages !");
+            sender.sendMessage(MsgPlus.getTranslation("console-error"));
             return true;
         }
         Player player = (Player) sender;
 
         if (!MsgPlus.lastReceived.containsKey(player.getUniqueId()) || MsgPlus.lastReceived.get(player.getUniqueId()) == null) {
-            player.sendMessage(ChatColor.RED + "You have no one to reply to !");
+            player.sendMessage(MsgPlus.getTranslation("no-reply"));
             return true;
         }
 
         Player to = Bukkit.getPlayer(MsgPlus.lastReceived.get(player.getUniqueId()));
         if (to == null) {
-            player.sendMessage("This player is offline");
+            player.sendMessage(MsgPlus.getTranslation("offline-player"));
             return true;
         }
 
         if (args.length < 1) {
-            sender.sendMessage(ChatColor.RED + "No message was entered !");
+            sender.sendMessage(MsgPlus.getTranslation("no-message"));
             return true;
         }
 
